@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FiservHub â€” Central de Links</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23FF6600'/><text x='16' y='21' text-anchor='middle' fill='white' font-size='14' font-family='system-ui' font-weight='700'>F</text></svg>">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--bg-base:#0a0a0f;--bg-elevated:#111118;--bg-surface:#16161e;--bg-overlay:#1c1c26;--bg-hover:#22222e;--border-ghost:rgba(255,255,255,0.06);--border-subtle:rgba(255,255,255,0.09);--text-primary:#e8e8ed;--text-secondary:#8b8b9e;--text-tertiary:#5c5c72;--text-muted:#3e3e52;--accent:#ff6600;--accent-subtle:rgba(255,102,0,0.08);--accent-text:#ff8533;--radius-sm:6px;--radius-md:10px;--radius-full:9999px;--shadow-md:0 4px 16px rgba(0,0,0,0.4),0 0 1px rgba(0,0,0,0.3);--font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{font-family:var(--font-sans);background:var(--bg-base);color:var(--text-primary);min-height:100vh;line-height:1.5}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(255,102,0,0.04) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(255,102,0,0.02) 0%,transparent 50%);pointer-events:none;z-index:0}
+::selection{background:rgba(255,102,0,0.25);color:white}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border-subtle);border-radius:var(--radius-full)}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:rgba(10,10,15,0.7);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);border-bottom:1px solid var(--border-ghost)}
+.topbar-left{display:flex;align-items:center;gap:16px}
+.logo-mark{width:28px;height:28px;border-radius:var(--radius-sm);background:linear-gradient(135deg,var(--accent) 0%,#e65500 100%);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:white;box-shadow:0 0 16px rgba(255,102,0,0.2);flex-shrink:0}
+.logo-text{font-size:15px;font-weight:600;color:var(--text-primary);letter-spacing:-0.3px}.logo-text span{color:var(--text-tertiary);font-weight:400}
+.fiserv-badge{width:36px;height:36px;border-radius:var(--radius-full);background:linear-gradient(135deg,var(--accent),#cc5200);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;border:2px solid rgba(255,102,0,0.2)}
+.main{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:calc(56px + 40px) 32px 64px}
+.page-header{margin-bottom:40px}.page-title{font-size:28px;font-weight:700;letter-spacing:-0.8px;line-height:1.2}
+.page-subtitle{font-size:14px;color:var(--text-tertiary);margin-top:8px}
+.stats-bar{display:flex;gap:24px;margin-top:20px}.stat-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-tertiary)}
+.stat-dot{width:6px;height:6px;border-radius:var(--radius-full);background:var(--accent);opacity:0.6}.stat-value{color:var(--text-secondary);font-weight:600}
+.category-section{margin-bottom:40px;animation:sectionIn 0.5s cubic-bezier(0.16,1,0.3,1) both}
+@keyframes sectionIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.category-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border-ghost)}
+.category-icon{width:20px;height:20px;border-radius:var(--radius-sm);background:var(--accent-subtle);display:flex;align-items:center;justify-content:center;color:var(--accent-text);flex-shrink:0}.category-icon svg{width:12px;height:12px}
+.category-title{font-size:13px;font-weight:600;color:var(--text-secondary);letter-spacing:-0.1px;text-transform:uppercase}
+.category-count{font-size:11px;color:var(--text-muted);font-weight:500;padding:2px 7px;border-radius:var(--radius-full);background:var(--bg-surface)}
+.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.link-card{position:relative;display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--bg-elevated);border:1px solid var(--border-ghost);border-radius:var(--radius-md);cursor:pointer;transition:all 250ms cubic-bezier(0.16,1,0.3,1);text-decoration:none;color:inherit;overflow:hidden;animation:cardIn 0.35s cubic-bezier(0.16,1,0.3,1) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(8px) scale(0.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.link-card::before{content:'';position:absolute;inset:-1px;border-radius:inherit;background:linear-gradient(135deg,rgba(255,102,0,0.1),transparent 40%);opacity:0;transition:opacity 250ms;pointer-events:none}
+.link-card:hover{border-color:var(--border-subtle);background:var(--bg-surface);transform:translateY(-1px);box-shadow:var(--shadow-md),0 0 20px rgba(255,102,0,0.03)}
+.link-card:hover::before{opacity:1}.link-card:active{transform:translateY(0);background:var(--bg-overlay)}
+.link-favicon{width:32px;height:32px;border-radius:var(--radius-sm);background:var(--bg-surface);border:1px solid var(--border-ghost);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;transition:border-color 150ms}
+.link-card:hover .link-favicon{border-color:var(--border-subtle)}
+.link-favicon img{width:20px;height:20px;object-fit:contain}
+.link-favicon .fallback-icon{font-size:14px;font-weight:700;color:var(--text-tertiary);text-transform:uppercase;line-height:1}
+.link-info{flex:1;min-width:0;position:relative;z-index:1}
+.link-name{font-size:13px;font-weight:500;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3;transition:color 150ms}
+.link-card:hover .link-name{color:white}
+.link-url{font-size:11px;color:var(--text-tertiary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px;transition:color 150ms}
+.link-card:hover .link-url{color:var(--text-secondary)}
+.link-external{width:16px;height:16px;color:var(--text-muted);flex-shrink:0;opacity:0;transition:opacity 150ms}.link-card:hover .link-external{opacity:1;color:var(--text-tertiary)}
+.footer{text-align:center;padding:32px 0 0;border-top:1px solid var(--border-ghost);margin-top:24px}
+.footer p{font-size:12px;color:var(--text-muted)}
+@media(max-width:768px){.topbar{padding:0 16px}.main{padding:calc(56px + 24px) 16px 40px}.links-grid{grid-template-columns:1fr}.page-title{font-size:22px}}
+@media(max-width:480px){.stats-bar{flex-wrap:wrap;gap:12px}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="logo-mark">F</div>
+    <div class="logo-text">FiservHub <span>/ links</span></div>
+  </div>
+  <div class="fiserv-badge">F</div>
+</header>
+
+<main class="main">
+  <div class="page-header">
+    <h1 class="page-title">Links da equipe</h1>
+    <p class="page-subtitle">Central de acesso rÃ¡pido Ã s ferramentas e plataformas</p>
+    <div class="stats-bar">
+      <div class="stat-item"><span class="stat-dot"></span><span class="stat-value">17</span> links</div>
+      <div class="stat-item"><span class="stat-dot"></span><span class="stat-value">4</span> grupos</div>
+    </div>
+  </div>
+
+  <section class="category-section" style="animation-delay:0ms">
+    <div class="category-header">
+      <div class="category-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div>
+      <span class="category-title">Portais</span>
+      <span class="category-count">5</span>
+    </div>
+    <div class="links-grid">
+      <a href="https://portaldocliente.softwareexpress.com.br/Login" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:0ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=portaldocliente.softwareexpress.com.br&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>P</span>'"></div>
+        <div class="link-info"><div class="link-name">Portal do Cliente</div><div class="link-url">portaldocliente.softwareexpress.com.br</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a href="https://admsitef.softwareexpress.com.br/sitefwebadm/pages/inicial.zeus" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:40ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=admsitef.softwareexpress.com.br&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>M</span>'"></div>
+        <div class="link-info"><div class="link-name">Motor</div><div class="link-url">admsitef.softwareexpress.com.br</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a href="https://sitefexpressadm.softwareexpress.com.br/sitefwebadm/pages/inicial.zeus" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:80ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=sitefexpressadm.softwareexpress.com.br&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>E</span>'"></div>
+        <div class="link-info"><div class="link-name">Express</div><div class="link-url">sitefexpressadm.softwareexpress.com.br</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a href="https://oauth.softwareexpress.com.br/auth/realms/sitefconciliacao/protocol/openid-connect/auth?response_type=code&amp;client_id=sitefwebadm&amp;scope=openid&amp;state=RZtJ-ir0uIzBmKKGYU4zcxEmfxrifetf64pElOAfe14%3D&amp;redirect_uri=https://sitefconciliacaoadm.producao.softwareexpress.com.br/sitefwebadm/login/oauth2/callback/keycloak&amp;nonce=cQSJMRW0BpokRdUg8RcQi4oHSmIryr-NOrUVB-Yqhqk" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:120ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=oauth.softwareexpress.com.br&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>G</span>'"></div>
+        <div class="link-info"><div class="link-name">GW FULL (5k)</div><div class="link-url">oauth.softwareexpress.com.br</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a href="https://oauth.softwareexpress.com.br/auth/realms/sitefweb/protocol/openid-connect/auth?response_type=code&amp;client_id=sitefwebadm&amp;scope=openid&amp;state=4mkvqI6YP6t2MLE3f8Q13C6H84CizutAIzRbzqBx2EA%3D&amp;redirect_uri=https://sitefwebadm.producao.softwareexpress.com.br/sitefwebadm/login/oauth2/callback/keycloak&amp;nonce=oldq7LoneB1ZKFb3g8XtmLye9z7bnfiZ_Ra96muH4FY" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:160ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=oauth.softwareexpress.com.br&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>S</span>'"></div>
+        <div class="link-info"><div class="link-name">Springboot (7k)</div><div class="link-url">oauth.softwareexpress.com.br</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </section>
+  <section class="category-section" style="animation-delay:60ms">
+    <div class="category-header">
+      <div class="category-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div>
+      <span class="category-title">Ferramentas de Atendimento</span>
+      <span class="category-count">3</span>
+    </div>
+    <div class="links-grid">
+      <a href="https://fiserv.callbox.com.br/painel/" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:60ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=fiserv.callbox.com.br&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>C</span>'"></div>
+        <div class="link-info"><div class="link-name">CallBox</div><div class="link-url">fiserv.callbox.com.br</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a href="https://fiserv-portalcliente-se.plusoftomni.com.br/" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:100ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=fiserv-portalcliente-se.plusoftomni.com.br&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>C</span>'"></div>
+        <div class="link-info"><div class="link-name">Chat | Plusoft Omni |</div><div class="link-url">fiserv-portalcliente-se.plusoftomni.com.br</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a href="https://fiservselatamprd.crm.dynamics.com/main.aspx" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:140ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=fiservselatamprd.crm.dynamics.com&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>C</span>'"></div>
+        <div class="link-info"><div class="link-name">CRM Dynamics 365</div><div class="link-url">fiservselatamprd.crm.dynamics.com</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </section>
+  <section class="category-section" style="animation-delay:120ms">
+    <div class="category-header">
+      <div class="category-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div>
+      <span class="category-title">Parceiros</span>
+      <span class="category-count">3</span>
+    </div>
+    <div class="links-grid">
+      <a href="https://vizzoo-web-app.nexxera.io/softwareexpress/login/" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:120ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=vizzoo-web-app.nexxera.io&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>V</span>'"></div>
+        <div class="link-info"><div class="link-name">Vizzoo</div><div class="link-url">vizzoo-web-app.nexxera.io</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a href="https://jira.nexxera.com/login.jsp?os_destination=%2Fsecure%2FDashboard.jspa" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:160ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=jira.nexxera.com&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>J</span>'"></div>
+        <div class="link-info"><div class="link-name">Jira - Nexxera</div><div class="link-url">jira.nexxera.com</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a href="https://commander.nexxera.io/login" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:200ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=commander.nexxera.io&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>C</span>'"></div>
+        <div class="link-info"><div class="link-name">Commander</div><div class="link-url">commander.nexxera.io</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </section>
+  <section class="category-section" style="animation-delay:180ms">
+    <div class="category-header">
+      <div class="category-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div>
+      <span class="category-title">Ferramentas (Geral)</span>
+      <span class="category-count">6</span>
+    </div>
+    <div class="links-grid">
+      <a href="https://l1pvap2136.1dc.com:8443/ControlM/" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:180ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=l1pvap2136.1dc.com&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>C</span>'"></div>
+        <div class="link-info"><div class="link-name">Control-M</div><div class="link-url">l1pvap2136.1dc.com</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a href="https://fiservservicepoint.fiservapps.com/now/nav/ui/classic/params/target/home.do" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:220ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=fiservservicepoint.fiservapps.com&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>S</span>'"></div>
+        <div class="link-info"><div class="link-name">ServiceNow</div><div class="link-url">fiservservicepoint.fiservapps.com</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a href="https://consoleremota.producao.softwareexpress.com.br/console/pages/inicial.zeus" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:260ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=consoleremota.producao.softwareexpress.com.br&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>C</span>'"></div>
+        <div class="link-info"><div class="link-name">Console Remota</div><div class="link-url">consoleremota.producao.softwareexpress.com.br</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a href="https://fiserv.secure.virtru.com/control-center/settings" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:300ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=fiserv.secure.virtru.com&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>V</span>'"></div>
+        <div class="link-info"><div class="link-name">Virtru</div><div class="link-url">fiserv.secure.virtru.com</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a href="https://akpvap104.1dc.com:10001/filegateway/home.do#route" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:340ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=akpvap104.1dc.com&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>S</span>'"></div>
+        <div class="link-info"><div class="link-name">SFG</div><div class="link-url">akpvap104.1dc.com</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a href="https://credenciamentodeextratos.producao.softwareexpress.com.br/estabelecimentos/view/7096" target="_blank" rel="noopener noreferrer" class="link-card" style="animation-delay:380ms">
+        <div class="link-favicon"><img src="https://www.google.com/s2/favicons?domain=credenciamentodeextratos.producao.softwareexpress.com.br&sz=64" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=fallback-icon>A</span>'"></div>
+        <div class="link-info"><div class="link-name">API - CREDENCIAMENTO DE EXTRATOS</div><div class="link-url">credenciamentodeextratos.producao.softwareexpress.com.br</div></div>
+        <svg class="link-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </section>
+  <div class="footer">
+    <p>FiservHub v1.0 â€” Desenvolvido por Leonardo Vasconcelos</p>
+  </div>
+</main>
+
+</body>
+</html>
