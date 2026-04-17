@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FiservHub â€” Central de Links</title>
+<title>FiservHub — Central de Links</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23FF6600'/><text x='16' y='21' text-anchor='middle' fill='white' font-size='14' font-family='system-ui' font-weight='700'>F</text></svg>">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <style>
@@ -22,14 +22,14 @@
 <main class="main">
   <div class="page-header">
     <h1 class="page-title">Links da equipe</h1>
-    <p class="page-subtitle">Central de acesso rÃ¡pido Ã s ferramentas e plataformas</p>
+    <p class="page-subtitle">Central de acesso rápido às ferramentas e plataformas</p>
     <div style="margin-top:24px;display:flex;gap:12px;align-items:center;">
       <input id="search" type="text" placeholder="Buscar links..." style="flex:1;padding:8px 12px;border-radius:6px;border:1px solid #ccc;outline:none;">
     </div>
   </div>
   <div id="categories"></div>
   <div class="footer">
-    <p>FiservHub v1.0 â€” Desenvolvido por Leonardo Vasconcelos</p>
+    <p>FiservHub v1.0 — Desenvolvido por Leonardo Vasconcelos</p>
   </div>
 </main>
 <script>
@@ -72,8 +72,10 @@ function render() {
   });
   document.getElementById('categories').innerHTML = html;
 }
-document.getElementById('search').oninput = render;
-window.onload = render;
+window.onload = function() {
+  document.getElementById('search').addEventListener('input', render);
+  render();
+};
 </script>
 </body>
 </html>
