@@ -1,0 +1,27 @@
+{
+  "categories": [
+    { "id": "portais", "name": "Portais" },
+    { "id": "atendimento", "name": "Ferramentas de Atendimento" },
+    { "id": "parceiros", "name": "Parceiros" },
+    { "id": "geral", "name": "Ferramentas (Geral)" }
+  ],
+  "links": [
+    { "name": "Portal do Cliente", "url": "https://portaldocliente.softwareexpress.com.br/Login", "category": "portais" },
+    { "name": "Motor", "url": "https://admsitef.softwareexpress.com.br/sitefwebadm/pages/inicial.zeus", "category": "portais" },
+    { "name": "Express", "url": "https://sitefexpressadm.softwareexpress.com.br/sitefwebadm/pages/inicial.zeus", "category": "portais" },
+    { "name": "GW FULL (5k)", "url": "https://oauth.softwareexpress.com.br/auth/realms/sitefconciliacao/protocol/openid-connect/auth?response_type=code&client_id=sitefwebadm&scope=openid&state=RZtJ-ir0uIzBmKKGYU4zcxEmfxrifetf64pElOAfe14%3D&redirect_uri=https://sitefconciliacaoadm.producao.softwareexpress.com.br/sitefwebadm/login/oauth2/callback/keycloak&nonce=cQSJMRW0BpokRdUg8RcQi4oHSmIryr-NOrUVB-Yqhqk", "category": "portais" },
+    { "name": "Springboot (7k)", "url": "https://oauth.softwareexpress.com.br/auth/realms/sitefweb/protocol/openid-connect/auth?response_type=code&client_id=sitefwebadm&scope=openid&state=4mkvqI6YP6t2MLE3f8Q13C6H84CizutAIzRbzqBx2EA%3D&redirect_uri=https://sitefwebadm.producao.softwareexpress.com.br/sitefwebadm/login/oauth2/callback/keycloak&nonce=oldq7LoneB1ZKFb3g8XtmLye9z7bnfiZ_Ra96muH4FY", "category": "portais" },
+    { "name": "CallBox", "url": "https://fiserv.callbox.com.br/painel/", "category": "atendimento" },
+    { "name": "Chat | Plusoft Omni |", "url": "https://fiserv-portalcliente-se.plusoftomni.com.br/", "category": "atendimento" },
+    { "name": "CRM Dynamics 365", "url": "https://fiservselatamprd.crm.dynamics.com/main.aspx", "category": "atendimento" },
+    { "name": "Vizzoo", "url": "https://vizzoo-web-app.nexxera.io/softwareexpress/login/", "category": "parceiros" },
+    { "name": "Jira - Nexxera", "url": "https://jira.nexxera.com/login.jsp?os_destination=%2Fsecure%2FDashboard.jspa", "category": "parceiros" },
+    { "name": "Commander", "url": "https://commander.nexxera.io/login", "category": "parceiros" },
+    { "name": "Control-M", "url": "https://l1pvap2136.1dc.com:8443/ControlM/", "category": "geral" },
+    { "name": "ServiceNow", "url": "https://fiservservicepoint.fiservapps.com/now/nav/ui/classic/params/target/home.do", "category": "geral" },
+    { "name": "Console Remota", "url": "https://consoleremota.producao.softwareexpress.com.br/console/pages/inicial.zeus", "category": "geral" },
+    { "name": "Virtru", "url": "https://fiserv.secure.virtru.com/control-center/settings", "category": "geral" },
+    { "name": "SFG", "url": "https://akpvap104.1dc.com:10001/filegateway/home.do#route", "category": "geral" },
+    { "name": "API - CREDENCIAMENTO DE EXTRATOS", "url": "https://credenciamentodeextratos.producao.softwareexpress.com.br/estabelecimentos/view/7096", "category": "geral" }
+  ]
+}
